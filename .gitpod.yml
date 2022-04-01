@@ -1,11 +1,11 @@
 tasks:
   - name: Docker-compose
-    command: cd Docker && docker-compose up -d && gp sync-done prev
+    command: cd Docker && docker-compose up -d && sleep 30 && gp sync-done prev
 
   - name: Nats-receive
     command: gp sync-await prev && docker exec -it client1 python /home/natscode/receive.py -s nats subject=demo -d "test" && gp sync-done prev1
     openMode: split-right
  
   - name: Nats-send
-    command:  gp sync-await prev1 && docker exec -it client2 python /home/natscode/send.py -s nats subject=demo -d "test"
+    command:  gp sync-await prev1 && docker exec -it client2 /bin/bash -c 'python /home/natscode/send.py -s nats subject=demo -d "test"'
     openMode: split-right
