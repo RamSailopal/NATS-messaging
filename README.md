@@ -1,5 +1,7 @@
 # NATS-messaging
 
+![Alt text](NATS-messaging.webp?raw=true "gitpod View")
+
 A demo of the NATS messaging framework written in Python.
 
 # Gitpod
