@@ -1,0 +1,36 @@
+#
+#       AUTHOR - Raman Sailopal
+#
+version: "2"
+services:
+ nats:
+   hostname: nats
+   container_name: nats
+   image: docker.io/nats 
+   networks:
+      - natsnet
+
+ client1:
+   image: docker.io/python
+   hostname: client1
+   container_name: client1
+   volumes:
+      - "../code:/home/natscode"
+   entrypoint: [ "/bin/bash", "-c", "pip install asyncio && pip install nats-py && tail -f /dev/null" ]
+   networks:
+      - natsnet
+
+ client2:
+   image: docker.io/python
+   hostname: client2
+   container_name: client2
+   volumes:
+      - "../code:/home/natscode"
+   networks:
+      - natsnet
+   entrypoint: [ "/bin/bash", "-c", "pip install asyncio && pip install nats-py && tail -f /dev/null" ]
+
+
+networks:
+    natsnet:
+
