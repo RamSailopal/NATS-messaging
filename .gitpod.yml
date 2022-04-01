@@ -7,5 +7,5 @@ tasks:
     openMode: split-right
  
   - name: Nats-send
-    command:  sleep 10 && docker exec -it client2 /bin/bash -c 'python /home/natscode/send.py -s nats subject=demo -d "test"'
+    command:  gp sync-await prev && sleep 10 && docker exec -it client2 /bin/bash -c 'python /home/natscode/send.py -s nats subject=demo -d "test"'
     openMode: split-right
